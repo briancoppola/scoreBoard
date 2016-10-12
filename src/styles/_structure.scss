@@ -1,0 +1,72 @@
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+header {
+  text-align: center;
+}
+article {
+  display: flex;
+  justify-content: center;
+}
+section {
+  width: 50%;
+}
+ul.scores {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+// player name titles
+.player .name {
+  text-align: center;
+}
+// input elements
+.player input {
+  width: 80%;
+  font-size: 2rem;
+  text-align: center;
+}
+.player button.add {
+  width: 10%;
+  height: 2.8rem;
+  border: 0;
+  background: pink;
+  font-size: 2rem;
+  color: $melon;
+}
+
+// list elements
+ul.scores li {
+  line-height: 1.5rem;
+  display: flex;
+}
+.score,
+.round {
+  padding: 0.5rem;
+  height: 1rem;
+  text-align: center;
+}
+.round {
+  background: $rind-lite;
+  color: $rind;
+  width: 1rem;
+}
+.score {
+  background: $melon;
+  color: $slate;
+  flex: 2;
+  font-weight: bold;
+}
+ul.scores li:nth-child(even) .round {
+  background: lighten($rind-lite, 5%);
+}
+ul.scores li:nth-child(even) .score {
+  background: lighten($melon, 5%);
+}
+.total {
+  background: $slate;
+  color: white;
+  padding: 1rem;
+  text-align: center;;
+}

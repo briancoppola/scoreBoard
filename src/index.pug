@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title ♥️ Score Board ♠️
+    link(rel="stylesheet", href="main.css")
+  body
+    header
+      h1 ♥️ Score Board ♠️
+    article
+      section.player.player1
+        h2.name(contenteditable) Player 1
+        input(type="number", pattern="\d*")
+        button.add +
+        ul.scores
+        div.total
+      section.player.player2
+        h2.name(contenteditable) Player 2
+        input(type="number", pattern="\d*")
+        button.add +
+        ul.scores
+        div.total
+    script(src="scoreBoard.js")
