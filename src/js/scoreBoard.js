@@ -70,17 +70,42 @@ function addPlayer1Score() {
 }
 
 function addPlayer2Score() {
-  var newScore = player2input.value;
-  if (newScore) {
-    var newScoreElement = document.createElement('li');
-    newScoreElement.innerHTML = newScore;
-    player2scores.appendChild(newScoreElement);
+  player2stats.score = Number(player2input.value);
+  if (player2stats.score) {
 
-    // clear input after adding
+    // update round
+    player2stats.round += 1;
+
+    // create span for the round number and add 'round' class
+    var currentRoundElement = document.createElement('span');
+    currentRoundElement.className = 'round';
+    // insert the current round number into the element
+    currentRoundElement.innerHTML = player2stats.round;
+
+    // create span for the current score and add 'score' class
+    var currentScoreElement = document.createElement('span');
+    currentScoreElement.className = 'score';
+    // put the current score into the 'score' element
+    currentScoreElement.innerHTML = player2stats.score;
+
+    // create a new list element to house the above two 'round' & 'score'
+    var newScoreListItem = document.createElement('li');
+
+    // append 'round' and 'score' to the new list element
+    newScoreListItem.appendChild(currentRoundElement);
+    newScoreListItem.appendChild(currentScoreElement);
+
+    // append the element to the parent list ul
+    player2scores.appendChild(newScoreListItem);
+
+    // clear input field after adding to list
     player2input.value = "";
 
-    // update total
-    player2sum(newScore);
+    // sum the score
+    player2stats.total += Number(player2stats.score);
+    player2total.innerHTML = "Total: " + player2stats.total;
+
+
   }
 }
 
