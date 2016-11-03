@@ -2,6 +2,7 @@ doctype html
 html
   head
     meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
     title ♥️ Score Board ♠️
     link(rel="stylesheet", href="main.css")
   body
@@ -9,13 +10,13 @@ html
       h1 ♥️ Score Board ♠️
     article
       section.player.player1
-        h2.name(contenteditable) Player 1
+        h2.name(contenteditable) P1
         input(type="number", pattern="\d*")
         button.add +
         ul.scores
         div.total
       section.player.player2
-        h2.name(contenteditable) Player 2
+        h2.name(contenteditable) P2
         input(type="number", pattern="\d*")
         button.add +
         ul.scores
