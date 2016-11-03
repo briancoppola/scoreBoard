@@ -31,7 +31,7 @@ player2add.addEventListener('click', addPlayer2Score, false);
 
 function addPlayer1Score() {
   player1stats.score = Number(player1input.value);
-  if (player1stats.score) {
+  if (player1stats.score !== "") {
 
     // update round
     player1stats.round += 1;
@@ -71,7 +71,7 @@ function addPlayer1Score() {
 
 function addPlayer2Score() {
   player2stats.score = Number(player2input.value);
-  if (player2stats.score) {
+  if (player2stats.score !== "") {
 
     // update round
     player2stats.round += 1;
