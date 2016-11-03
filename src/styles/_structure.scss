@@ -5,6 +5,10 @@ body {
 header {
   text-align: center;
 }
+header h1 {
+  margin-top: 0;
+  margin-bottom: 0.1em;
+}
 article {
   display: flex;
   justify-content: center;
@@ -20,20 +24,28 @@ ul.scores {
 // player name titles
 .player .name {
   text-align: center;
+  font-size: 3em;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
 }
 // input elements
 .player input {
-  width: 80%;
+  width: 47%;
   font-size: 2rem;
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 .player button.add {
-  width: 10%;
+  width: 47%;
   height: 2.8rem;
   border: 0;
   background: pink;
   font-size: 2rem;
   color: $melon;
+  margin: 0;
+  padding: 0;
 }
 
 // list elements
@@ -43,9 +55,10 @@ ul.scores li {
 }
 .score,
 .round {
-  padding: 0.5rem;
-  height: 1rem;
+  padding: 0.5em;
+  height: 1em;
   text-align: center;
+  font-size: 2rem;
 }
 .round {
   background: $rind-lite;
@@ -67,6 +80,7 @@ ul.scores li:nth-child(even) .score {
 .total {
   background: $slate;
   color: white;
-  padding: 1rem;
-  text-align: center;;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 2em;
 }
