@@ -11,3 +11,55 @@ $rind-lite: rgb(201, 215, 135); // light green
 $melon-lite: rgb(255, 192, 169); // light pink
 $melon: rgb(255, 133, 152); // watermelon flesh
 $slate: #444;
+
+// Blackberry
+$berry: rgb(34, 0, 51); // purple
+$berry-lite: rgb(153, 102, 136); // light purple
+$berry-mousse: rgb(204, 170, 187); // soft grey purple
+$berry-mousse-lite: rgb(255, 221, 238); // light pink-purple
+$cream: rgb(255, 255, 255); // white
+
+// Player 1
+.player1 input {
+  background: lighten($rind-lite, 20%);
+}
+.player1 button.add {
+  background: $rind-lite;
+  color: $rind;
+}
+.player1 .scores .round {
+  background: $rind;
+  color: lighten($rind-lite, 8%);
+}
+.player1 .scores .score {
+  background: lighten($melon, 10%);
+  color: $melon;
+}
+.player1 .scores li:nth-child(even) .round {
+  background: lighten($rind, 8%);
+}
+.player1 .scores li:nth-child(even) .score {
+  background: lighten($melon, 15%);
+}
+// Player 2
+.player2 input {
+  background: lighten($berry-mousse, 15%);
+}
+.player2 button.add {
+  background: $berry-lite;
+  color: $berry;
+}
+.player2 .scores .round {
+  background: $berry;
+  color: $berry-mousse-lite;
+}
+.player2 .scores .score {
+  background: $berry-mousse;
+  color: $berry;
+}
+.player2 .scores li:nth-child(even) .round {
+  background: lighten($berry, 5%);
+}
+.player2 .scores li:nth-child(even) .score {
+  background: lighten($berry-mousse, 9%);
+}

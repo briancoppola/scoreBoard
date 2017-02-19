@@ -1,5 +1,7 @@
 console.log('loaded scoreBoard.js');
 
+var header = document.querySelector('header');
+
 var player1 = document.querySelector('.player1');
 var player2 = document.querySelector('.player2');
 
@@ -14,6 +16,8 @@ var player2input = document.querySelector('.player2 input');
 
 var player1scores = document.querySelector('.player1 ul');
 var player2scores = document.querySelector('.player2 ul');
+
+header.addEventListener('click', reset, false);
 
 var player1stats = {
   score: 0,
@@ -31,7 +35,7 @@ player2add.addEventListener('click', addPlayer2Score, false);
 
 function addPlayer1Score() {
   player1stats.score = Number(player1input.value);
-  if (player1stats.score !== "") {
+  if (player1stats.score !== "" && player1stats.score !== NaN) {
 
     // update round
     player1stats.round += 1;
@@ -112,4 +116,8 @@ function addPlayer2Score() {
 function player2sum(newScore) {
   player2stats.total += Number(newScore);
   player2total.innerHTML = "Total: " + player2stats.total;
+}
+
+function reset() {
+  console.log('reset');
 }

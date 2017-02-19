@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "saltymouse",
+  "private": true,
   "license": "ISC",
   "devDependencies": {
     "del": "^2.2.2",
