@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     pump = require('pump'),
     webserver = require('gulp-webserver'),
     sourcemaps = require('gulp-sourcemaps');
+    
 gulp.task('clean', () => {
   return del([
     'build/*' // clear the 'build' directory

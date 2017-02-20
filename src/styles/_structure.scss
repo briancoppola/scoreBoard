@@ -2,7 +2,7 @@ html,body {
   margin: 0;
 }
 body {
-  font-family: sans-serif;
+  font-family: Avenir, Helvetica, sans-serif;
   font-size: 16px;
 }
 header {
@@ -61,20 +61,32 @@ ul.scores li {
   line-height: 2em;
   display: flex;
 }
+.delete,
 .score,
 .round {
-  padding: 0.5em;
-  height: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2em;
   text-align: center;
   font-size: 2rem;
+  flex-grow: 1;
 }
 .round {
-  width: 2.2rem;
 }
 .score {
   color: $slate;
-  flex: 2;
   font-weight: bold;
+  flex-grow: 3;
+}
+.delete {
+  background: crimson;
+  color: white;
+  font-weight: bold;
+  transition: all 200ms ease;
+  overflow: hidden;
+  width: 0;
+  flex-grow: 0;
 }
 
 .total {
@@ -83,4 +95,8 @@ ul.scores li {
   padding: 0.5rem;
   text-align: center;
   font-size: 2em;
+}
+.remove .delete {
+  width: auto;
+  flex-grow: 1;
 }
