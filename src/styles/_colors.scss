@@ -1,65 +1,56 @@
-// Pop scheme
-$red: rgb(229, 29, 77);
-$teal: rgb(50, 191, 181);
-$white: rgb(230, 222, 211);
-$gold: rgb(229, 166, 0);
-$blue: rgb(15, 0, 56);
+// flavours need a low and equal-ish luminance value
+$strawberry: hsl(355, 65, 25);
+$blackberry: hsl(303, 40, 25);
+$blueberry: hsl(208, 40, 20);
+$chocolate: hsl(25, 43, 20);
+$matcha: hsl(73, 88, 15);
 
-// Watermelon
-$rind: rgb(125, 138, 46); // green
-$rind-lite: rgb(201, 215, 135); // light green
-$melon-lite: rgb(255, 192, 169); // light pink
-$melon: rgb(255, 133, 152); // watermelon flesh
-$slate: #444;
+// accents
+$stone: #262721;
+$birch: #F2F2F2;
 
-// Blackberry
-$berry: rgb(34, 0, 51); // purple
-$berry-lite: rgb(153, 102, 136); // light purple
-$berry-mousse: rgb(204, 170, 187); // soft grey purple
-$berry-mousse-lite: rgb(255, 221, 238); // light pink-purple
-$cream: rgb(255, 255, 255); // white
+$flavours: $strawberry, $chocolate, $blackberry, $matcha;
 
-// Player 1
-.player1 input {
-  background: lighten($rind-lite, 20%);
+// get a wrangle on those saturation levels for lightened colours
+@function sat-set($colour, $desat-amount) {
+  @if (saturation($colour) > 43) {
+    // mellow out the harsh saturation an extra 10 percent
+    @return desaturate(lighten($colour, 50%), ($desat-amount + 10));
+  } @else if (saturation($colour) >= 43) {
+    @return desaturate(lighten($colour, 50%), $desat-amount);
+  } @else {
+    // just lighten it a bit
+    @return lighten($colour, 50%);
+  }
 }
-.player1 button.add {
-  background: $rind-lite;
-  color: $rind;
+
+@for $i from 1 through length($flavours) {
+  .player:nth-child(0n+#{$i}) .score-input {
+    background: sat-set(nth($flavours, $i), 30);
+  }
+  .player:nth-child(0n+#{$i}) button.add {
+    background: nth($flavours, $i);
+    color: $birch;
+  }
+  // round number
+  .player:nth-child(0n+#{$i}) .scores .round {
+    background: $stone;
+    color: $birch;
+  }
+  .player:nth-child(0n+#{$i}) .scores li:nth-child(even) .round {
+    background: lighten($stone, 10%);
+    color: $birch;
+  }
+  // user's scores
+  .player:nth-child(0n+#{$i}) .scores .score {
+    background: desaturate(lighten(nth($flavours, $i), 25%), 10%);
+  }
+  .player:nth-child(0n+#{$i}) .scores li:nth-child(even) .score {
+    background: sat-set(nth($flavours, $i), 10);
+  }
 }
-.player1 .scores .round {
-  background: $rind;
-  color: lighten($rind-lite, 8%);
-}
-.player1 .scores .score {
-  background: lighten($melon, 10%);
-  color: $melon;
-}
-.player1 .scores li:nth-child(even) .round {
-  background: lighten($rind, 8%);
-}
-.player1 .scores li:nth-child(even) .score {
-  background: lighten($melon, 15%);
-}
-// Player 2
-.player2 input {
-  background: lighten($berry-mousse, 15%);
-}
-.player2 button.add {
-  background: $berry-lite;
-  color: $berry;
-}
-.player2 .scores .round {
-  background: $berry;
-  color: $berry-mousse-lite;
-}
-.player2 .scores .score {
-  background: $berry-mousse;
-  color: $berry;
-}
-.player2 .scores li:nth-child(even) .round {
-  background: lighten($berry, 5%);
-}
-.player2 .scores li:nth-child(even) .score {
-  background: lighten($berry-mousse, 9%);
+
+.total {
+  background: $stone;
+  color: $birch;
 }
