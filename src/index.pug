@@ -6,22 +6,12 @@ html
     title ♥️ Score Board ♠️
     link(rel="stylesheet", href="main.css")
   body
-    div.container
+    div.app
       header
-        h1 ♥️ Score Board ♠️
-      article.scoreboard
-        section.player.player1
-          h2.name(contenteditable) 🐡
-          div.inputs
-            input(type="number", pattern="[0-9]")
-            button.add +
-          ul.scores
-          div.total
-        section.player.player2
-          h2.name(contenteditable) 🦊
-          div.inputs
-            input(type="number", pattern="[0-9]")
-            button.add +
-          ul.scores
-          div.total
+        h1
+          span.remove-player ♥️
+          span.app-name Score Board 
+          span.add-player ♠️
+      article.stage
+
     script(src="scoreBoard.js")
