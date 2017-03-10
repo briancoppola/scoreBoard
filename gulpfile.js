@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     pump = require('pump'),
     webserver = require('gulp-webserver'),
     sourcemaps = require('gulp-sourcemaps');
-    
+
 gulp.task('clean', () => {
   return del([
     'build/*' // clear the 'build' directory
@@ -39,7 +39,11 @@ gulp.task('uglify', (cb) => {
   ],
   cb
   );
-})
+});
+
+gulp.task('jscopy', () => gulp
+  .src('src/js/*.js')
+  .pipe(gulp.dest('build')));
 
 gulp.task('webserver', () => {
   gulp.src('build')
@@ -50,8 +54,14 @@ gulp.task('webserver', () => {
     }));
 });
 
-gulp.task('default', ['clean', 'sass', 'pug', 'uglify', 'webserver'], () => {
+gulp.task('default', ['clean', 'sass', 'pug', 'jscopy', 'webserver'], () => {
   gulp.watch(['src/styles/*.scss'], ['sass'])
   gulp.watch(['src/*.pug'], ['pug'])
   gulp.watch(['src/js/*.js'], ['uglify'])
+});
+
+gulp.task('dev', ['clean', 'sass', 'pug', 'jscopy', 'webserver'], () => {
+  gulp.watch(['src/styles/*.scss'], ['sass'])
+  gulp.watch(['src/*.pug'], ['pug'])
+  gulp.watch(['src/js/*.js'], ['jscopy'])
 });
