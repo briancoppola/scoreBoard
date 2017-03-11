@@ -205,3 +205,10 @@ pushPlayer('🦊');
 pushPlayer('🍡');
 pushPlayer('🍝');
 pushPlayer('🐙');
+
+players.forEach(function(player) {
+  for (var i = 0; i < 25; i += 1) {
+    player.addToScores(Math.floor(Math.random() * 30));
+  }
+  player.refresh();
+})
