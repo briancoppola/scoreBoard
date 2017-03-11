@@ -133,7 +133,7 @@ header h1 {
   flex-grow: 1;
 }
 
-// set width based on number of elements
+// set player container width based on number of elements
 @for $i from 1 through 4 {
   .player:first-child:nth-last-child(#{$i}),
   .player:first-child:nth-last-child(#{$i}) ~ .player {
