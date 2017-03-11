@@ -10,14 +10,14 @@ var players = [];
 window.addEventListener('scroll', function(e) {
   if (window.pageYOffset > players[0].elements.playerHeading.scrollHeight) {
     players.forEach(function(player) {
-      player.elements.playerHeading.className = 'name squish'
+      player.elements.playerHeading.className = 'name squish';
     })
   } else if (window.pageYOffset < players[0].elements.playerHeading.scrollHeight) {
     players.forEach(function(player) {
-      player.elements.playerHeading.className = 'name'
+      player.elements.playerHeading.className = 'name';
     })
   }
-})
+});
 
 
 removePlayerButton.addEventListener('click', removePlayer);
@@ -37,8 +37,8 @@ function pushPlayer(playerName) {
 }
 
 function removePlayer() {
-  if (players.length > 1) { //at least 1 player
-    players[players.length -1].erase();
+  if (players.length > 1) { // at least 1 player
+    players[players.length - 1].erase();
     players.splice(-1, 1);
   }
 }

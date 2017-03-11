@@ -1,4 +1,5 @@
-html,body {
+html,
+body {
   margin: 0;
 }
 body {
@@ -32,40 +33,50 @@ header h1 {
 }
 // player name titles
 .player .name {
-  background: transparentize($stone, 0.2);
-  display: inline-flex;
+  margin: 0;
+  display: flex;
+  font-size: 3.5em;
+  width: inherit;
+  height: 1.5em;
+  transition: all 200ms ease;
+  position: relative;
+}
+.player .name .title {
+  position: fixed;
+  display: flex;
   justify-content: center;
   align-items: center;
+  width: inherit;
+  height: inherit;
   margin: 0;
-  padding: 0;
-  font-size: 3.5em;
-  width: 100%;
-  height: auto;
-
-  transition: all 200ms ease;
+  transition: all 100ms ease; // on scroll back to top / restore
+  z-index: 99;
+  background: transparentize($stone, 0.3);
 }
 .player .name.squish {
   font-size: 2em;
-  transition: all 200ms ease;
-  position: fixed;
-  width: inherit;
 }
 .player .name.squish .title {
+  width: inherit;
+  height: 1.5em;
+  transition: all 300ms ease; // on scroll down
+}
+.player .name .title::after {
+  content: " ";
+  position: absolute;
+  top: 0.10em;
+  left: calc(50% - 0.65em);
   width: 1.3em;
   height: 1.3em;
-  transition: all 200ms ease;
-}
-.player .name .title {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background: transparentize(white, 0.1);
-  width: 1.7em;
-  height: 1.7em;
+  background: transparentize(white, 0.2);
+  z-index: -1;
   border-radius: 50%;
-  margin: 0.1em;
-  transition: all 200ms ease;
 }
+.player .name.squish .title::after {
+  
+  
+}
+
 // inputs wrapper
 .input-wrap {
   display: flex;
@@ -103,15 +114,14 @@ header h1 {
   height: 2em;
   text-align: center;
   font-size: 1.6rem;
-  flex: 0 1 auto;
 }
 .round {
   width: 2rem;
-  flex: 0 1 1;
+  flex: 0 1 auto;
 }
 .score {
   font-weight: bold;
-  flex: 3 1 auto;
+  flex: 2 1 auto;
 }
 .delete {
   background: crimson;
@@ -120,7 +130,6 @@ header h1 {
   transition: all 200ms ease;
   overflow: hidden;
   width: 0;
-  flex-grow: 0;
 }
 
 .total {
