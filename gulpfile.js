@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     pump = require('pump'),
     webserver = require('gulp-webserver'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    prefix = require('gulp-autoprefixer');
 
 gulp.task('clean', () => {
   return del([
@@ -19,6 +20,7 @@ gulp.task('sass', () => {
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
+    .pipe(prefix('last 2 versions'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('build'));
 });
