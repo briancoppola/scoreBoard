@@ -1,12 +1,17 @@
 var gulp = require('gulp'),
-    del = require('del'),
-    sass = require('gulp-sass'),
-    pug = require('gulp-pug'),
-    uglify = require('gulp-uglify'),
-    pump = require('pump'),
-    webserver = require('gulp-webserver'),
-    sourcemaps = require('gulp-sourcemaps'),
-    prefix = require('gulp-autoprefixer');
+  del = require('del'),
+  sass = require('gulp-sass'),
+  pug = require('gulp-pug'),
+  uglify = require('gulp-uglify'),
+  pump = require('pump'),
+  webserver = require('gulp-webserver'),
+  sourcemaps = require('gulp-sourcemaps'),
+  prefix = require('gulp-autoprefixer');
+
+
+/*
+  For shipping/building production code
+*/
 
 gulp.task('clean', () => {
   return del([
@@ -16,21 +21,19 @@ gulp.task('clean', () => {
 
 gulp.task('sass', () => {
   return gulp.src('src/styles/*.scss')
-    .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
     .pipe(prefix('last 2 versions'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('build'));
-});
+    .pipe(gulp.dest('build'))
+})
 
 gulp.task('pug', () => {
   return gulp.src('src/*.pug')
-  .pipe(pug({
-    pretty: true
-  }))
-  .pipe(gulp.dest('build'));
+    .pipe(pug({
+      pretty: false
+    }))
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('uglify', (cb) => {
@@ -39,13 +42,9 @@ gulp.task('uglify', (cb) => {
     uglify(),
     gulp.dest('build')
   ],
-  cb
+    cb
   );
 });
-
-gulp.task('jscopy', () => gulp
-  .src('src/js/*.js')
-  .pipe(gulp.dest('build')));
 
 gulp.task('webserver', () => {
   gulp.src('build')
@@ -56,13 +55,56 @@ gulp.task('webserver', () => {
     }));
 });
 
-gulp.task('default', ['clean', 'sass', 'pug', 'jscopy', 'webserver'], () => {
+gulp.task('default', ['clean', 'sass', 'pug', 'uglify', 'webserver'], () => {
   gulp.watch(['src/styles/*.scss'], ['sass'])
   gulp.watch(['src/*.pug'], ['pug'])
   gulp.watch(['src/js/*.js'], ['uglify'])
 });
 
-gulp.task('dev', ['clean', 'sass', 'pug', 'jscopy', 'webserver'], () => {
+/*
+  Developer options
+*/
+
+gulp.task('cleanDev', () => {
+  return del([
+    'dev/*' // clear the 'build' directory
+  ]);
+});
+
+gulp.task('pugDev', () => {
+  return gulp.src('src/*.pug')
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(gulp.dest('dev'));
+});
+
+gulp.task('sassDev', () => {
+  return gulp.src('src/styles/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }).on('error', sass.logError))
+    .pipe(prefix('last 2 versions'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('dev'));
+});
+
+// copy JS exactly for easier debugging
+gulp.task('jscopy', () => gulp
+  .src('src/js/*.js')
+  .pipe(gulp.dest('dev')));
+
+gulp.task('webDev', () => {
+  gulp.src('dev')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: true,
+    }));
+});
+
+gulp.task('dev', ['cleanDev', 'sassDev', 'pugDev', 'jscopy', 'webDev'], () => {
   gulp.watch(['src/styles/*.scss'], ['sass'])
   gulp.watch(['src/*.pug'], ['pug'])
   gulp.watch(['src/js/*.js'], ['jscopy'])

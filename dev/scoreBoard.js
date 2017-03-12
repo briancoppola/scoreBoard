@@ -7,48 +7,6 @@ var addPlayerButton = document.querySelector('.add-player');
 var removePlayerButton = document.querySelector('.remove-player');
 var players = [];
 
-var xDown = null,
-    yDown = null;
-
-function handleTouchStart(event) {
-  console.log(event);
-  xDown = event.touches[0].clientX;
-  yDown = event.touches[0].clientY;
-  console.log(xDown, yDown);
-}
-
-function handleTouchMove(e) {
-  // console.log(e.touches);
-  if (!xDown || !yDown) {
-    return; // do nothing if we have no values
-  }
-
-  var xUp = e.touches[0].clientX;
-  var yUp = e.touches[0].clientY;
-
-  var xDelta = xDown - xUp;
-  var yDelta = yDown - yUp;
-
-  if (Math.abs(xDelta) > Math.abs(yDelta)) {
-    if (xDelta > 0) {
-      console.log(e.target.parentNode, 'left')
-      e.target.parentNode.className = 'round-wrap delete';
-    } else {
-      console.log('right')
-    }
-  } else {
-    if (yDelta > 0) {
-      console.log(e.target, 'up')
-    } else {
-      console.log('down')
-    }
-  }
-
-  // reset
-  xDown = null;
-  yDown = null;
-}
-
 
 var previousScroll = 0;
 window.addEventListener('scroll', function(e) {
@@ -57,13 +15,13 @@ window.addEventListener('scroll', function(e) {
     players.forEach(function(player) {
       player.elements.playerHeading.className = 'name squish';
     });
-  } else if (window.pageYOffset < players[0].elements.playerHeading.scrollHeight - players[0].elements.inputWrap.scrollHeight && currentScroll < previousScroll) {
+  } else if (window.pageYOffset < players[0].elements.playerHeading.scrollHeight - players[0].elements.inputWrap.scrollHeight && current < previous) {
     players.forEach(function(player) {
       player.elements.playerHeading.className = 'name';
     })
     window.scrollTo(0, 0); // lock to the top of the page
   }
-  previousScroll = currentScroll;
+  previous = current;
 });
 
 
@@ -209,10 +167,9 @@ function Player(playerName) {
   this.displayScores = function() {
     this.scores.forEach(function(scoreValue, roundValue) {
       // create necessary elements for each score value on display
-      var scoreWrap = document.createElement('li'),
-          scoreBox = document.createElement('span'),
-          roundBox = document.createElement('span'),
-          deleteBox = document.createElement('span');
+      var scoreWrap = document.createElement('li');
+      var scoreBox = document.createElement('span');
+      var roundBox = document.createElement('span');
 
       // listen for swipe events
       scoreWrap.addEventListener('touchstart', handleTouchStart, false);
@@ -222,20 +179,12 @@ function Player(playerName) {
       scoreWrap.className = 'round-wrap';
       scoreBox.className = 'score';
       roundBox.className = 'round';
-      deleteBox.className = 'delete-box'
 
       // add the values
       scoreBox.innerHTML = scoreValue;
       roundBox.innerHTML = roundValue + 1; // +1 for humans!
-      deleteBox.innerHTML = '×';
 
-      // listen to taps on the deleteBox
-      deleteBox.addEventListener('click', function(event) {
-        var clickedRound = event.target.parentNode.innerHTML - 1;
-        this.removeScore(clickedRound);
-      }.bind(this));
-
-      // add 'delete score' function upon clicking the round number
+      // add remove
       roundBox.addEventListener('click', function(event) {
         var clickedRound = event.target.innerHTML - 1;
         this.removeScore(clickedRound);

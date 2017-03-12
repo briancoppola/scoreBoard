@@ -4,7 +4,8 @@
   "description": "Keep track of points  during card games",
   "main": "index.pug",
   "scripts": {
-    "start": "gulp"
+    "dev": "gulp dev",
+    "build": "gulp"
   },
   "author": "saltymouse",
   "private": true,

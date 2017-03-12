@@ -143,7 +143,7 @@ header h1 {
   font-weight: bold;
   flex: 2 1 auto;
 }
-.delete {
+.delete-box {
   background: crimson;
   color: white;
   font-weight: bold;
@@ -157,9 +157,13 @@ header h1 {
   text-align: center;
   font-size: 2em;
 }
-.remove .delete {
+.delete-active .delete-box {
   width: auto;
-  flex-grow: 1;
+  flex: 1 0 auto;
+}
+.delete-active .round {
+  flex: 0 0 0px;
+  width: 0;
 }
 
 // set player container width based on number of elements
