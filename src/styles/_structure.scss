@@ -11,13 +11,32 @@ header {
   text-align: center;
   position: absolute;
   width: 100%;
-  display: none;
 }
-header h1 {
+header .controls {
   display: flex;
   justify-content: space-between;
+}
+header .controls span {
+  width: 1.5em;
+  height: 1.5em;
+  background: white;
+  z-index: 100;
+  padding: 0.1em;
+  margin: 0;
+  line-height: 1.2em;
+}
+header .controls .add-player {
+  border-bottom-left-radius: 100%;
+  text-align: right;
+}
+header .controls .remove-player {
+  border-bottom-right-radius: 100%;
+  text-align: left;
+}
+header h1 {
   width: 100%;
   margin: 0;
+  display: none;
 }
 .stage {
   display: flex;
@@ -25,6 +44,7 @@ header h1 {
 }
 .player {
   position: relative;
+  transition: all 200ms ease-out;
 }
 .scores {
   list-style-type: none;
@@ -37,8 +57,7 @@ header h1 {
   display: flex;
   font-size: 3.5em;
   width: inherit;
-  height: 1.5em;
-  transition: all 200ms ease;
+  height: 5.5rem;
   position: relative;
 }
 .player .name .title {
@@ -49,8 +68,8 @@ header h1 {
   width: inherit;
   height: inherit;
   margin: 0;
-  transition: all 100ms ease; // on scroll back to top / restore
-  z-index: 99;
+  transition: all 100ms ease-in; // on scroll back to top / restore
+  z-index: 50;
   background: transparentize($stone, 0.3);
 }
 .player .name.squish {
@@ -59,7 +78,7 @@ header h1 {
 .player .name.squish .title {
   width: inherit;
   height: 1.5em;
-  transition: all 300ms ease; // on scroll down
+  transition: all 300ms ease-out; // on scroll down
 }
 .player .name .title::after {
   content: " ";
@@ -91,6 +110,7 @@ header h1 {
   margin: 0;
   padding: 0;
   border: 0;
+  border-radius: 0;
 }
 .player button.add {
   width: 50%;
