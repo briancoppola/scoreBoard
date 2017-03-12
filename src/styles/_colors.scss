@@ -35,11 +35,11 @@ $flavours: $strawberry, $chocolate, $blackberry, $matcha;
   // round number
   .player:nth-child(0n+#{$i}) .scores .round {
     background: $stone;
-    color: $birch;
+    color: darken($birch, 20%);
   }
   .player:nth-child(0n+#{$i}) .scores li:nth-child(even) .round {
     background: lighten($stone, 10%);
-    color: $birch;
+    color: darken($birch, 20%);
   }
   // user's scores
   .player:nth-child(0n+#{$i}) .scores .score {
