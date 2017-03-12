@@ -125,7 +125,7 @@ header h1 {
   line-height: 2em;
   display: flex;
 }
-.delete,
+.delete-box,
 .score,
 .round {
   display: inline-flex;
@@ -138,14 +138,15 @@ header h1 {
 .round {
   width: 2rem;
   flex: 0 1 auto;
+  transition: all 200ms ease;
 }
 .score {
   font-weight: bold;
-  flex: 2 1 auto;
+  flex: 20 1 0;
 }
 .delete-box {
-  background: crimson;
-  color: white;
+  background: white;
+  color: crimson;
   font-weight: bold;
   transition: all 200ms ease;
   overflow: hidden;
@@ -158,12 +159,14 @@ header h1 {
   font-size: 2em;
 }
 .delete-active .delete-box {
-  width: auto;
+  width: 2rem;
   flex: 1 0 auto;
 }
 .delete-active .round {
-  flex: 0 0 0px;
   width: 0;
+  transition: all 200ms ease;
+  overflow: hidden;
+  // flex: 0 0 0px;
 }
 
 // set player container width based on number of elements

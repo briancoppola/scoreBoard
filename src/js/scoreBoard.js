@@ -32,9 +32,10 @@ function handleTouchMove(e) {
   if (Math.abs(xDelta) > Math.abs(yDelta)) {
     if (xDelta > 0) {
       console.log(e.target.parentNode, 'left')
-      e.target.parentNode.className = 'round-wrap delete';
+      e.target.parentNode.className = 'round-wrap delete-active';
     } else {
       console.log('right')
+      e.target.parentNode.className = 'round-wrap';
     }
   } else {
     if (yDelta > 0) {
@@ -231,19 +232,19 @@ function Player(playerName) {
 
       // listen to taps on the deleteBox
       deleteBox.addEventListener('click', function(event) {
-        var clickedRound = event.target.parentNode.innerHTML - 1;
+        var clickedRound = event.target.parentNode.childNodes[0].innerHTML - 1;
         this.removeScore(clickedRound);
       }.bind(this));
 
       // add 'delete score' function upon clicking the round number
       roundBox.addEventListener('click', function(event) {
-        var clickedRound = event.target.innerHTML - 1;
-        this.removeScore(clickedRound);
+        event.target.parentNode.className = "score-wrap delete-active"
       }.bind(this));
 
       // nest inside the wrapper
       scoreWrap.appendChild(roundBox);
       scoreWrap.appendChild(scoreBox);
+      scoreWrap.appendChild(deleteBox);
 
       // append to the dom
       this.elements.scores.appendChild(scoreWrap);
