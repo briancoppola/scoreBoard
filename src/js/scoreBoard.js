@@ -62,7 +62,6 @@ window.addEventListener('scroll', function(e) {
     players.forEach(function(player) {
       player.elements.playerHeading.className = 'name';
     })
-    window.scrollTo(0, 0); // lock to the top of the page
   }
   previousScroll = currentScroll;
 });
@@ -263,13 +262,11 @@ function Player(playerName) {
 
 
 pushPlayer('🦊');
-pushPlayer('🍡');
-pushPlayer('🍝');
 pushPlayer('🐙');
 
-players.forEach(function(player) {
-  for (var i = 0; i < 25; i += 1) {
-    player.addToScores(Math.floor(Math.random() * 30));
-  }
-  player.refresh();
-})
+// players.forEach(function(player) {
+//   for (var i = 0; i < 25; i += 1) {
+//     player.addToScores(Math.floor(Math.random() * 30));
+//   }
+//   player.refresh();
+// })

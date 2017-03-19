@@ -50,6 +50,11 @@ header h1 {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.reverse {
+  flex-direction: column-reverse;
 }
 // player name titles
 .player .name {
@@ -131,18 +136,20 @@ header h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2em;
+  height: 100%;
   text-align: center;
   font-size: 1.6rem;
+  line-height: 2.8rem;
 }
 .round {
   width: 2rem;
-  flex: 0 1 auto;
+  overflow: hidden;
   transition: all 200ms ease;
+  font-size: 1.2em;
 }
 .score {
   font-weight: bold;
-  flex: 20 1 0;
+  flex: 20 1 auto;
 }
 .delete-box {
   background: white;
@@ -160,13 +167,11 @@ header h1 {
 }
 .delete-active .delete-box {
   width: 2rem;
-  flex: 1 0 auto;
 }
 .delete-active .round {
   width: 0;
   transition: all 200ms ease;
   overflow: hidden;
-  // flex: 0 0 0px;
 }
 
 // set player container width based on number of elements

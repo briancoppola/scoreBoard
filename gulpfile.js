@@ -67,7 +67,7 @@ gulp.task('default', ['clean', 'sass', 'pug', 'uglify', 'webserver'], () => {
 
 gulp.task('cleanDev', () => {
   return del([
-    'dev/*' // clear the 'build' directory
+    'build/*' // clear the 'build' directory
   ]);
 });
 
@@ -76,7 +76,7 @@ gulp.task('pugDev', () => {
     .pipe(pug({
       pretty: true
     }))
-    .pipe(gulp.dest('dev'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('sassDev', () => {
@@ -87,16 +87,16 @@ gulp.task('sassDev', () => {
     }).on('error', sass.logError))
     .pipe(prefix('last 2 versions'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dev'));
+    .pipe(gulp.dest('build'));
 });
 
 // copy JS exactly for easier debugging
 gulp.task('jscopy', () => gulp
   .src('src/js/*.js')
-  .pipe(gulp.dest('dev')));
+  .pipe(gulp.dest('build')));
 
 gulp.task('webDev', () => {
-  gulp.src('dev')
+  gulp.src('build')
     .pipe(webserver({
       livereload: true,
       directoryListing: false,
