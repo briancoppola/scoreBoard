@@ -90,10 +90,16 @@ function removePlayer() {
   }
 }
 
-function randomEmoji() {
-  return 1;
+function randomEmoji(point) {
+  point = point || 
+  // assumes a point > 0xffff (outside UTF-8)
+  var offset = point - 0x10000,
+      lead = 0xd800 + (offset >> 10),
+      trail = 0xdc00 + (offset & 0x3ff);
+  
+  return String.fromCharCode(lead, trail);
 }
-console.log(randomEmoji());
+console.log(randomEmoji(0x1F680));
 
 function Player(playerName) {
   this.scores = [],
@@ -264,9 +270,9 @@ function Player(playerName) {
 pushPlayer('🦊');
 pushPlayer('🐙');
 
-// players.forEach(function(player) {
-//   for (var i = 0; i < 25; i += 1) {
-//     player.addToScores(Math.floor(Math.random() * 30));
-//   }
-//   player.refresh();
-// })
+players.forEach(function(player) {
+  for (var i = 0; i < 5; i += 1) {
+    player.addToScores(Math.floor(Math.random() * 30));
+  }
+  player.refresh();
+})
