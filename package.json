@@ -5,7 +5,7 @@
   "main": "index.pug",
   "scripts": {
     "dev": "gulp dev",
-    "build": "gulp"
+    "build": "gulp; sh ./upload"
   },
   "author": "saltymouse",
   "private": true,
