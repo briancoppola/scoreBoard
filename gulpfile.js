@@ -26,7 +26,7 @@ gulp.task('sass', () => {
     }).on('error', sass.logError))
     .pipe(prefix('last 2 versions'))
     .pipe(gulp.dest('build'))
-})
+});
 
 gulp.task('pug', () => {
   return gulp.src('src/*.pug')
