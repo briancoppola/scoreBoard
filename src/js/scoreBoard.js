@@ -90,16 +90,21 @@ function removePlayer() {
   }
 }
 
-function randomEmoji(point) {
-  point = point || 
-  // assumes a point > 0xffff (outside UTF-8)
-  var offset = point - 0x10000,
-      lead = 0xd800 + (offset >> 10),
-      trail = 0xdc00 + (offset & 0x3ff);
-  
-  return String.fromCharCode(lead, trail);
+function randomEmoji() {
+  // only use the range that includes animals...
+  // ...which luckily has no blank ('empty') entries
+  // https://en.wikipedia.org/wiki/Emoji#Unicode_blocks
+
+  var min = 0x1F400; // 128000
+  var max = 0x1F430; // 128048
+
+  var basePoint = Math.floor(Math.random() * (max - min) + min);
+
+  return String.fromCharCode(
+    ((basePoint - 0x10000) >> 10) | 0xD800,
+    ((basePoint - 0x10000) % 0x400) | 0xDC00
+  );
 }
-console.log(randomEmoji(0x1F680));
 
 function Player(playerName) {
   this.scores = [],
@@ -267,8 +272,8 @@ function Player(playerName) {
 }
 
 
-pushPlayer('🦊');
-pushPlayer('🐙');
+pushPlayer(randomEmoji());
+pushPlayer(randomEmoji());
 
 players.forEach(function(player) {
   for (var i = 0; i < 5; i += 1) {
