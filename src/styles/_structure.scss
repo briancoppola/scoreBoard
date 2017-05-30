@@ -81,7 +81,8 @@ header h1 {
   margin: 0;
   transition: all 100ms ease-in; // on scroll back to top / restore
   z-index: 50;
-  cursor: pointer;
+  cursor: pointer; // for a button-like feel
+  user-select: none; // disable text-selection
 }
 .player .name.squish {
   font-size: 2em;
