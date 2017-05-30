@@ -50,7 +50,7 @@ function handleTouchMove(e) {
   yDown = null;
 }
 
-
+// shrink player header/name-board upon scrolling down
 var previousScroll = 0;
 window.addEventListener('scroll', function(e) {
   var currentScroll = window.pageYOffset;
@@ -70,7 +70,7 @@ window.addEventListener('scroll', function(e) {
 removePlayerButton.addEventListener('click', removePlayer);
 addPlayerButton.addEventListener('click', pushPlayer);
 
-function pushPlayer(playerName) {
+function pushPlayer(event, playerName) {
   var args = Array.prototype.slice.apply(arguments);
   console.log(args);
   args = args.slice(1);
@@ -98,18 +98,18 @@ function randomEmoji() {
   var min = 0x1F400; // 128000
   var max = 0x1F430; // 128048
 
-  var basePoint = Math.floor(Math.random() * (max - min) + min);
+  var pointFromRange = Math.floor(Math.random() * (max - min) + min);
 
   return String.fromCharCode(
-    ((basePoint - 0x10000) >> 10) | 0xD800,
-    ((basePoint - 0x10000) % 0x400) | 0xDC00
+    ((pointFromRange - 0x10000) >> 10) | 0xD800,
+    ((pointFromRange - 0x10000) % 0x400) | 0xDC00
   );
 }
 
 function Player(playerName) {
   this.scores = [],
   this.total = 0,
-  this.name = playerName ? playerName : 'P' + Math.floor(Math.random() * 99),
+  this.name = "" || playerName,
   this.elements = {
     playerWrap: document.createElement('section'),
     playerHeading: document.createElement('h2'),
@@ -138,7 +138,7 @@ function Player(playerName) {
 
     // add custom attributes where necessary
     this.elements.playerTitle.innerHTML = this.name;
-    this.elements.playerTitle.contentEditable = true;
+    this.elements.playerTitle.addEventListener('click', this.setName.bind(this), false); // bind 'this' to the outer Player object (rather than the thing that's clicked)
 
     this.elements.addButton.innerHTML = '+';
     this.elements.addButton.addEventListener('click', this.addToScores.bind(this), false); // bind 'this' to the outer Player object
@@ -180,7 +180,8 @@ function Player(playerName) {
     this.displayTotal();
   },
   this.setName = function() {
-    this.elements.playerName.innerHTML = playerName || 'Player';
+    this.name = randomEmoji();
+    this.elements.playerTitle.innerHTML = this.name;
   },
   this.addToScores = function(apiInput) {
     var guiInput = this.elements.scoreInput.value,
@@ -272,8 +273,8 @@ function Player(playerName) {
 }
 
 
-pushPlayer(randomEmoji());
-pushPlayer(randomEmoji());
+pushPlayer(0,randomEmoji());
+pushPlayer(0,randomEmoji());
 
 players.forEach(function(player) {
   for (var i = 0; i < 5; i += 1) {
