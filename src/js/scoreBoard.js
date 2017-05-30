@@ -95,21 +95,30 @@ function randomEmoji() {
   // ...which luckily has no blank ('empty') entries
   // https://en.wikipedia.org/wiki/Emoji#Unicode_blocks
 
-  var min = 0x1F400; // 128000
-  var max = 0x1F430; // 128048
+  // first set of animals
+  var min1 = 0x1F400;
+  var max1 = 0x1F430;
+  // second set of animals
+  var min2 = 0x1F980;
+  var max2 = 0x1F991;
 
-  var pointFromRange = Math.floor(Math.random() * (max - min) + min);
+  var pointRange = [];
+  pointRange.push(Math.floor(Math.random() * (max1 - min1) + min1));
+  pointRange.push(Math.floor(Math.random() * (max2 - min2) + min2));
+
+  var randomPoint = Math.floor(Math.random() * pointRange.length);
+
 
   return String.fromCharCode(
-    ((pointFromRange - 0x10000) >> 10) | 0xD800,
-    ((pointFromRange - 0x10000) % 0x400) | 0xDC00
+    ((pointRange[randomPoint] - 0x10000) >> 10) | 0xD800,
+    ((pointRange[randomPoint] - 0x10000) % 0x400) | 0xDC00
   );
 }
 
 function Player(playerName) {
   this.scores = [],
   this.total = 0,
-  this.name = "" || playerName,
+  this.name = randomEmoji(),
   this.elements = {
     playerWrap: document.createElement('section'),
     playerHeading: document.createElement('h2'),
