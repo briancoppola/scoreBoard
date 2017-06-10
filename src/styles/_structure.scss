@@ -71,7 +71,7 @@ header h1 {
   position: relative;
 }
 .player .name .title {
-  background: transparentize($stone, 0.3);
+  // background: transparentize($stone, 0.3);
   position: fixed;
   display: flex;
   justify-content: center;
@@ -157,6 +157,8 @@ header h1 {
 .score {
   font-weight: bold;
   flex: 20 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .delete-box {
   background: white;
@@ -171,6 +173,8 @@ header h1 {
   padding: 0.5rem;
   text-align: center;
   font-size: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .delete-active .delete-box {
   width: 2rem;
