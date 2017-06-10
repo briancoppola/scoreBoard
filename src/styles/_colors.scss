@@ -25,6 +25,9 @@ $flavours: $strawberry, $chocolate, $blackberry, $matcha;
 }
 
 @for $i from 1 through length($flavours) {
+  .player:nth-child(0n+#{$i}) .title {
+    background: transparentize( mix(nth($flavours, $i), $stone), 0.1);
+  }
   .player:nth-child(0n+#{$i}) .score-input {
     background: sat-set(nth($flavours, $i), 30);
   }
