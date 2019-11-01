@@ -25,6 +25,7 @@ $flavours: $strawberry, $chocolate, $blackberry, $matcha;
 }
 
 @for $i from 1 through length($flavours) {
+  .player:nth-child(0n+#{$i}),
   .player:nth-child(0n+#{$i}) .title {
     background: transparentize( mix(nth($flavours, $i), $stone), 0.1);
   }

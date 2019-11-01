@@ -1,8 +1,12 @@
 html,
-body {
+body,
+.app {
+  height: 100%;
   margin: 0;
 }
 body {
+  display: flex;
+  flex-flow: column;
   font-family: "Avenir Next", Avenir, Helvetica, sans-serif;
   font-size: 16px;
   position: relative;
@@ -45,9 +49,16 @@ header h1 {
 }
 .stage {
   display: flex;
+  flex: 0 1 auto;
+  flex-flow: row nowrap;
   justify-content: center;
+  height: 100%;
 }
 .player {
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: column nowrap;
+  height: 100%;
   position: relative;
   transition: all 200ms ease-out;
 }
@@ -173,6 +184,7 @@ header h1 {
   padding: 0.5rem;
   text-align: center;
   font-size: 2em;
+  margin-top: auto;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -189,6 +201,6 @@ header h1 {
 @for $i from 1 through 4 {
   .player:first-child:nth-last-child(#{$i}),
   .player:first-child:nth-last-child(#{$i}) ~ .player {
-    width: 100% / $i
+    width: 100% / $i;
   }
 }
