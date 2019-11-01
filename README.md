@@ -24,3 +24,5 @@ Demo is auto-filled with random scores for demonstration purposes.
 - ~~Add ability to add additional players~~
 - ~~Add ability to delete registered scores~~
 - Add ability to modify existing scores
+- Upgrade to ES6
+- Make componentized version
